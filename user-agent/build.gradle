@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    archiveName("user-agent.jar")
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }}
+
+    manifest {
+        attributes(
+                'Premain-Class' : 'com.practice.user.Agent',
+                'Can-Redefine-Classes' : 'true',
+                'Can-Retransform-Classes' : 'true'
+        )
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'net.bytebuddy:byte-buddy:1.10.13'
+
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'user-java-agent'
+include 'user-agent'
+
